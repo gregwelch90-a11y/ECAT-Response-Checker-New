@@ -1,0 +1,419 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red70\green137\blue204;\red23\green24\blue24;}
+{\*\expandedcolortbl;;\cssrgb\c33725\c61176\c83922;\cssrgb\c11765\c12157\c12549;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>ECAT Blue Light Response Checker (Real API)</title>\
+    \
+    <!-- \
+      REAL GOOGLE MAPS API SCRIPT\
+      This loads the Distance Matrix library using the provided key.\
+    -->\
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-HPemyZUKc42MBLUbVD0JGuqffBpei94&libraries=places"></script>\
+\
+    <style>\
+        /* THEME CHANGE: Primary color set to Safety Orange */\
+        :root \{\
+            --primary-color: #FF8C00; /* Safety Orange / Dark Amber */\
+            --secondary-color: #ffffff;\
+            --alert-red: #d9002f;\
+            --success-green: #007f3b;\
+            --bg-color: #f0f4f5;\
+        \}\
+\
+        body \{\
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\
+            background-color: var(--bg-color);\
+            margin: 0;\
+            padding: 0;\
+            display: flex;\
+            flex-direction: column;\
+            min-height: 100vh;\
+            color: #333;\
+        \}\
+\
+        header \{\
+            background-color: var(--primary-color);\
+            color: var(--secondary-color);\
+            padding: 1.5rem;\
+            text-align: center;\
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\
+        \}\
+\
+        h1 \{\
+            margin: 0;\
+            font-size: 1.8rem;\
+            display: flex;\
+            align-items: center;\
+            justify-content: center;\
+        \}\
+        \
+        /* Style for the SVG icon */\
+        .header-icon \{\
+            stroke: var(--secondary-color);\
+            fill: none;\
+            margin: 0 10px;\
+        \}\
+\
+\
+        main \{\
+            flex: 1;\
+            display: flex;\
+            flex-direction: column;\
+            align-items: center;\
+            padding: 2rem;\
+            max-width: 600px;\
+            margin: 0 auto;\
+            width: 100%;\
+            box-sizing: border-box;\
+        \}\
+\
+        .card \{\
+            background: white;\
+            padding: 2rem;\
+            border-radius: 8px;\
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);\
+            width: 100%;\
+            margin-bottom: 2rem;\
+        \}\
+\
+        .info-panel \{\
+            background-color: #e8edee;\
+            /* Changed border color to new primary theme color */\
+            border-left: 5px solid var(--primary-color);\
+            padding: 1rem;\
+            margin-bottom: 1.5rem;\
+        \}\
+        \
+        /* New style for the disclaimer box */\
+        .disclaimer-panel \{\
+            background-color: #fff3e0; /* Light orange background */\
+            border: 1px solid var(--primary-color);\
+            border-radius: 4px;\
+            padding: 1rem;\
+            margin-bottom: 1.5rem;\
+            font-size: 0.9rem;\
+            color: #444;\
+        \}\
+        .disclaimer-panel strong \{\
+            color: #333;\
+            font-weight: 700;\
+        \}\
+\
+\
+        .info-item \{\
+            margin-bottom: 0.5rem;\
+            font-size: 0.95rem;\
+        \}\
+\
+        .info-item strong \{\
+            color: #333; /* Keep strong text readable */\
+        \}\
+\
+        label \{\
+            display: block;\
+            margin-bottom: 0.5rem;\
+            font-weight: bold;\
+        \}\
+\
+        input[type="text"] \{\
+            width: 100%;\
+            padding: 12px;\
+            border: 2px solid #ccc;\
+            border-radius: 4px;\
+            font-size: 1rem;\
+            box-sizing: border-box;\
+            margin-bottom: 1rem;\
+        \}\
+\
+        input[type="text"]:focus \{\
+            border-color: var(--primary-color);\
+            outline: none;\
+        \}\
+\
+        button \{\
+            width: 100%;\
+            padding: 14px;\
+            /* Button background uses new primary theme color */\
+            background-color: var(--primary-color);\
+            color: white;\
+            border: none;\
+            border-radius: 4px;\
+            font-size: 1.1rem;\
+            font-weight: bold;\
+            cursor: pointer;\
+            transition: background-color 0.2s;\
+        \}\
+\
+        button:hover \{\
+            background-color: #e07b00; /* Slightly darker orange on hover */\
+        \}\
+\
+        button:disabled \{\
+            background-color: #999;\
+            cursor: not-allowed;\
+        \}\
+\
+        #result-container \{\
+            margin-top: 1.5rem;\
+            display: none;\
+            padding: 1.5rem;\
+            border-radius: 6px;\
+            text-align: center;\
+        \}\
+\
+        .result-success \{\
+            background-color: #e6f4ea;\
+            border: 2px solid var(--success-green);\
+            color: var(--success-green);\
+        \}\
+\
+        /* Failure result (outside target) uses the red alert color for high visibility */\
+        .result-fail \{\
+            background-color: #fce8e8;\
+            border: 2px solid var(--alert-red);\
+            color: var(--alert-red);\
+        \}\
+        \
+        /* Specific styling for the critical failure message to make it bold */\
+        .result-fail .result-title \{\
+            font-size: 1.5rem;\
+            text-transform: uppercase;\
+        \}\
+\
+        .result-title \{\
+            font-size: 1.4rem;\
+            font-weight: bold;\
+            margin-bottom: 0.5rem;\
+        \}\
+\
+        .result-time \{\
+            font-size: 1.1rem;\
+            line-height: 1.5;\
+        \}\
+\
+        footer \{\
+            background-color: #333;\
+            color: #ccc;\
+            text-align: center;\
+            padding: 1rem;\
+            font-size: 0.9rem;\
+            margin-top: auto;\
+        \}\
+\
+        footer a \{\
+            color: white;\
+            text-decoration: underline;\
+        \}\
+    </style>\
+</head>\
+<body>\
+\
+    <header>\
+        <!-- London Air Ambulance/ECAT Theme Icon -->\
+        <h1>\
+            <!-- Simple Helicopter Icon (SVG) -->\
+            <svg class="header-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">\
+                <path d="M17 10H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2z"/>\
+                <path d="M10 10v7a2 2 0 0 0 2 2h3"/>\
+                <path d="M15 17h6"/>\
+                <path d="M10 10v-3"/>\
+                <path d="M15 4h-5"/>\
+                <path d="M19 19H5"/>\
+                <path d="M12 22a2 2 0 0 1-2-2v-3"/>\
+            </svg>\
+            ECAT Blue Light Response Checker\
+        </h1>\
+    </header>\
+\
+    <main>\
+        <div class="card">\
+            <!-- Static Information -->\
+            <div class="info-panel">\
+                <div class="info-item"><strong>Fixed Destination:</strong> The Royal London Hospital, E1 1BB</div>\
+                <div class="info-item"><strong>Target Response Time:</strong> &le; 25 Minutes</div>\
+            </div>\
+\
+            <!-- New Disclaimer Section -->\
+            <div class="disclaimer-panel">\
+                <strong>Disclaimer:</strong> This tool uses Google Maps' real-time traffic data to provide drive time estimations. This information is intended to *assist* decision-making only. The final decision regarding the mode of transport and dispatch must remain at the discretion of the clinician on the HEMS desk.\
+            </div>\
+\
+            <!-- User Input -->\
+            <label for="postcode-input">Enter Incident Location Postcode</label>\
+            <input type="text" id="postcode-input" placeholder="e.g. E14 9GE" aria-label="Enter Incident Location Postcode">\
+            \
+            <button id="check-btn" onclick="handleCheckDriveTime()">Check Drive Time</button>\
+\
+            <!-- Output Display -->\
+            <div id="result-container">\
+                <div class="result-title" id="result-title"></div>\
+                <div class="result-time" id="result-details"></div>\
+            </div>\
+        </div>\
+    </main>\
+\
+    <footer>\
+        <!-- Updated Contact Info: Text is now wrapped in strong for better visibility -->\
+        <strong>Please report any issues with this web app to lead paramedic and <a href="mailto:Gregory.welch@nhs.net">Gregory.welch@nhs.net</a></strong>\
+    </footer>\
+\
+    <script>\
+        // CONFIGURATION\
+        const TARGET_DESTINATION = "The Royal London Hospital, E1 1BB, UK";\
+        const TARGET_MINUTES = 25;\
+\
+        // --- REAL GOOGLE API FUNCTION ---\
+        // This function wraps the Google Maps Distance Matrix Service in a Promise\
+        // so we can use modern async/await syntax.\
+        async function getRealDriveTime(origin) \{\
+            \
+            return new Promise((resolve, reject) => \{\
+                // check if API loaded\
+                if (!window.google || !window.google.maps) \{\
+                    reject("Google Maps API not loaded. Check internet connection and API key.");\
+                    return;\
+                \}\
+\
+                const service = new google.maps.DistanceMatrixService();\
+                \
+                service.getDistanceMatrix(\
+                    \{\
+                        origins: [origin],\
+                        destinations: [TARGET_DESTINATION],\
+                        travelMode: 'DRIVING',\
+                        drivingOptions: \{\
+                            departureTime: new Date(), // Request real-time traffic info\
+                            trafficModel: 'bestguess'\
+                        \},\
+                        unitSystem: google.maps.UnitSystem.METRIC\
+                    \}, \
+                    (response, status) => \{\
+                        if (status !== 'OK') \{\
+                            reject("API Request Failed: " + status);\
+                        \} else \{\
+                            // Check if the specific element was found\
+                            const rows = response.rows;\
+                            if (rows.length > 0 && rows[0].elements.length > 0) \{\
+                                const element = rows[0].elements[0];\
+                                \
+                                if (element.status === 'OK') \{\
+                                    // Use duration_in_traffic if available (real-time), otherwise standard duration\
+                                    const durationSec = element.duration_in_traffic \
+                                        ? element.duration_in_traffic.value \
+                                        : element.duration.value;\
+                                    \
+                                    resolve(\{\
+                                        durationInSeconds: durationSec,\
+                                        valid: true\
+                                    \});\
+                                \} else \{\
+                                    // ZERO_RESULTS usually means the postcode was invalid or route impossible\
+                                    resolve(\{ valid: false, reason: element.status \});\
+                                \}\
+                            \} else \{\
+                                resolve(\{ valid: false, reason: "NO_DATA" \});\
+                            \}\
+                        \}\
+                    \}\
+                );\
+            \});\
+        \}\
+\
+        // --- MAIN LOGIC CONTROLLER ---\
+        async function handleCheckDriveTime() \{\
+            const inputField = document.getElementById('postcode-input');\
+            const resultContainer = document.getElementById('result-container');\
+            const btn = document.getElementById('check-btn');\
+            \
+            // Replaced alert with a check for empty input\
+            const postcode = inputField.value.trim();\
+\
+            if (!postcode) \{\
+                // Simple non-blocking message if input is empty\
+                btn.innerText = "Please enter a postcode.";\
+                setTimeout(() => btn.innerText = "Check Drive Time", 2000);\
+                return;\
+            \}\
+\
+            // 2. UI Updates (Loading State)\
+            btn.disabled = true;\
+            btn.innerText = "Calculating real-time traffic...";\
+            resultContainer.style.display = 'none';\
+\
+            try \{\
+                // 3. Call the Real API\
+                const data = await getRealDriveTime(postcode);\
+\
+                // 4. Process Results\
+                if (!data.valid) \{\
+                    const errorMsg = data.reason === 'NOT_FOUND' || data.reason === 'ZERO_RESULTS' \
+                        ? "Postcode not found or no valid route could be determined." \
+                        : "A calculation error occurred.";\
+                    \
+                    showResult("Error", errorMsg, false);\
+                \} else \{\
+                    // Convert seconds to minutes (rounding up is safer for "response time" estimates)\
+                    const minutes = Math.ceil(data.durationInSeconds / 60);\
+                    \
+                    if (minutes <= TARGET_MINUTES) \{\
+                        showResult(\
+                            "WITHIN TARGET", \
+                            `Estimated Drive Time: $\{minutes\} mins. This location meets the Blue Light response time target.`, \
+                            true\
+                        );\
+                    \} else \{\
+                        // CRITICAL FAILURE MESSAGE\
+                        const failureTitle = "CRITICAL: DRIVE TIME EXCEEDED";\
+                        const failureMessage = `Estimated Drive Time: $\{minutes\} mins. Emergency response time is greater than $\{TARGET_MINUTES\} minutes. If the ECAT team is on the helipad, consider using the aircraft to respond.`;\
+                        \
+                        showResult(\
+                            failureTitle, \
+                            failureMessage, \
+                            false\
+                        );\
+                    \}\
+                \}\
+\
+            \} catch (error) \{\
+                console.error("System Error:", error);\
+                showResult("System Error", "Could not connect to Google Maps. Please ensure the API script is loaded and the key is valid.", false);\
+            \} finally \{\
+                // Reset Button\
+                btn.disabled = false;\
+                btn.innerText = "Check Drive Time";\
+            \}\
+        \}\
+\
+        // Helper to update the UI\
+        function showResult(title, message, isSuccess) \{\
+            const container = document.getElementById('result-container');\
+            const titleEl = document.getElementById('result-title');\
+            const detailsEl = document.getElementById('result-details');\
+\
+            // Reset classes\
+            container.classList.remove('result-success', 'result-fail');\
+            \
+            // Add appropriate class\
+            if (title.includes("Error") || !isSuccess) \{\
+                container.classList.add('result-fail');\
+            \} else \{\
+                container.classList.add('result-success');\
+            \}\
+\
+            titleEl.textContent = title;\
+            detailsEl.textContent = message;\
+            container.style.display = 'block';\
+        \}\
+    </script>\
+</body>\
+</html>}
