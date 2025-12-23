@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ECAT Blue Light Response Checker (Real API)</title>
+
+    <!--
+      REAL GOOGLE MAPS API SCRIPT
+      This loads the Distance Matrix library using the provided key.
+      Note: The API key is visible in the client bundle here. For production
+      consider restricting the key to allowed referrers or injecting it
+      server-side to avoid exposing it publicly.
+    -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-HPemyZUKc42MBLUbVD0JGuqffBpei94&libraries=places"></script>
+
+    <style>
+        :root {
+            --primary-color: #FF8C00;
+            --secondary-color: #ffffff;
+            --alert-red: #d9002f;
+            --success-green: #007f3b;
+            --bg-color: #f0f4f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+        }
+
+        .header-icon { stroke: var(--secondary-color); fill: none; }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .info-panel {
+            background-color: #e8edee;
+            border-left: 5px solid var(--primary-color);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .disclaimer-panel {
+            background-color: #fff3e0;
+            border: 1px solid var(--primary-color);
+            border-radius: 4px;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        .disclaimer-panel strong { color: #333; font-weight: 700; }
+
+        .info-item { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .info-item strong { color: #333; }
+
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            margin-bottom: 0.75rem;
+        }
+        input[type="text"]:focus, input[type="number"]:focus { border-color: var(--primary-color); outline: none; }
+
+        .factor-row { display: flex; gap: .75rem; align-items: center; margin-bottom: 0.75rem; }
+        .factor-controls { flex: 1; display:flex; gap:.5rem; align-items:center; }
+        input[type="range"] { width: 100%; appearance: none; height: 6px; border-radius: 6px; background: linear-gradient(90deg, var(--primary-color), #ffc27a); outline: none; margin: 0; }
+        input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 3px solid var(--primary-color); box-shadow: 0 1px 2px rgba(0,0,0,0.2); cursor: pointer; }
+        .factor-value { min-width: 68px; text-align: center; font-weight:700; background:#f6f6f6; padding:6px 8px; border-radius:4px; border:1px solid #ddd; }
+
+        .info-btn { background: transparent; border: 1px solid #ccc; border-radius: 50%; width: 32px; height: 32px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-weight:bold; color:#333; }
+        .tooltip { display:none; background:#333; color:#fff; padding:.5rem; border-radius:6px; position:absolute; z-index:10; max-width:320px; font-size:0.9rem; box-shadow:0 4px 10px rgba(0,0,0,0.15); margin-top:.5rem; }
+        .info-container { position: relative; display:inline-block; }
+        .info-container:hover .tooltip, .info-container:focus-within .tooltip { display:block; }
+
+        .primary-btn { width:100%; padding:12px 14px; background-color:var(--primary-color); color:white; border:none; border-radius:4px; font-size:1.05rem; font-weight:bold; cursor:pointer; transition: background-color 0.2s; display:inline-flex; align-items:center; justify-content:center; gap:.5rem; }
+        .primary-btn:hover { background-color:#e07b00; }
+        .primary-btn:disabled { background-color:#999; cursor:not-allowed; }
+
+        .spinner { width:18px; height:18px; border:3px solid rgba(255,255,255,0.25); border-top-color: rgba(255,255,255,0.95); border-radius:50%; animation:spin 1s linear infinite; display:inline-block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        #result-container { margin-top: 1rem; display:none; padding:1rem; border-radius:6px; text-align:left; white-space: pre-wrap; }
+        .result-success { background-color: #e6f4ea; border: 2px solid var(--success-green); color: var(--success-green); }
+        .result-fail { background-color: #fce8e8; border: 2px solid var(--alert-red); color: var(--alert-red); }
+        .result-title { font-size: 1.2rem; font-weight:bold; margin-bottom:.5rem; }
+        .result-time { font-size:1rem; line-height:1.4; }
+
+        .muted { color:#666; font-size:.95rem; }
+
+        footer { background-color:#333; color:#ccc; text-align:center; padding:1rem; font-size:0.9rem; margin-top:auto; }
+        footer a { color:white; text-decoration:underline; }
+
+        .sr-only { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); border:0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            <svg class="header-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28" aria-hidden="true" focusable="false">
+                <path d="M17 10H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2z"/>
+                <path d="M10 10v7a2 2 0 0 0 2 2h3"/>
+                <path d="M15 17h6"/>
+                <path d="M10 10v-3"/>
+                <path d="M15 4h-5"/>
+                <path d="M19 19H5"/>
+                <path d="M12 22a2 2 0 0 1-2-2v-3"/>
+            </svg>
+            ECAT Blue Light Response Checker
+        </h1>
+    </header>
+
+    <main>
+        <div class="card">
+            <div class="info-panel">
+                <div class="info-item"><strong>Fixed Destination:</strong> The Royal London Hospital, E1 1BB</div>
+                <div class="info-item"><strong>Target Response Time (Blue Light):</strong> &le; 25 Minutes</div>
+            </div>
+
+            <div class="disclaimer-panel">
+                <strong>Disclaimer:</strong> This tool uses Google Maps' real-time traffic data to provide drive time estimations. This information is intended to assist decision-making only. The final decision should be made by the HEMS clinician. Drive time estimates can vary with traffic conditions and the route chosen; treat the values here as estimates rather than absolute guarantees.
+            </div>
+
+            <label for="postcode-input">Enter Incident Location Postcode</label>
+            <input type="text" id="postcode-input" placeholder="e.g. E14 9GE" aria-label="Enter Incident Location Postcode" />
+
+            <div class="muted" id="postcode-hint">UK postcode format will be checked before lookup.</div>
+
+            <hr style="margin: 1rem 0; border: none; border-top: 1px solid #eee;">
+
+            <label for="blue-factor">Blue Light Time Factor</label>
+            <div class="factor-row" aria-hidden="false">
+                <div class="factor-controls" style="flex:1">
+                    <input type="range" id="blue-factor" min="0.10" max="1.00" step="0.01" value="0.60" aria-describedby="factor-help" />
+                </div>
+
+                <div style="display:flex; gap:.5rem; align-items:center;">
+                    <input type="number" id="blue-factor-number" min="0.10" max="1.00" step="0.01" value="0.60" class="factor-value" aria-label="Blue light time factor numeric value" />
+                </div>
+
+                <div class="info-container" style="margin-left:.5rem;">
+                    <button id="factor-info" class="info-btn" aria-describedby="factor-help" aria-expanded="false" title="What is this?">i</button>
+                    <div id="factor-help" role="tooltip" class="tooltip">
+                        The Blue Light factor is the ratio applied to the normal estimated driving time to approximate the faster “blue light” (emergency) driving time. Default = 0.60 (i.e. 60% of normal drive time). Adjust to match local evidence; this value affects whether the Blue Light drive time meets the 25-minute target.
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: .75rem;" class="muted">Adjust the slider or enter a numeric value (0.10–1.00). Values below 0.10 are not permitted.</div>
+
+            <button id="check-btn" class="primary-btn" onclick="handleCheckDriveTime()" aria-live="polite">
+                <span id="btn-text">Check Drive Time</span>
+                <span id="btn-spinner" class="spinner" style="display:none" aria-hidden="true"></span>
+            </button>
+
+            <div id="result-container" role="status" aria-live="polite">
+                <div class="result-title" id="result-title"></div>
+                <div class="result-time" id="result-details"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <strong>Please report any issues with this web app to lead paramedic and <a href="mailto:Gregory.welch@nhs.net">Gregory.welch@nhs.net</a></strong>
+    </footer>
+
+    <script>
+        // CONFIG
+        const TARGET_DESTINATION = "The Royal London Hospital, E1 1BB, UK";
+        const TARGET_MINUTES = 25;
+        const DEFAULT_BLUE_LIGHT_FACTOR = 0.6;
+
+        // Elements
+        const blueFactorRange = document.getElementById('blue-factor');
+        const blueFactorNumber = document.getElementById('blue-factor-number');
+        const checkBtn = document.getElementById('check-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnSpinner = document.getElementById('btn-spinner');
+        const resultContainer = document.getElementById('result-container');
+        const resultTitle = document.getElementById('result-title');
+        const resultDetails = document.getElementById('result-details');
+        const postcodeInput = document.getElementById('postcode-input');
+        const factorInfoBtn = document.getElementById('factor-info');
+
+        // Loading state helper
+        function setLoading(loading) {
+            if (loading) {
+                btnSpinner.style.display = 'inline-block';
+                btnText.textContent = 'Calculating real-time traffic...';
+                checkBtn.disabled = true;
+            } else {
+                btnSpinner.style.display = 'none';
+                btnText.textContent = 'Check Drive Time';
+                checkBtn.disabled = false;
+            }
+        }
+
+        // Format factor values to two decimals
+        function formatFactor(val) {
+            return parseFloat(val).toFixed(2);
+        }
+
+        // Sync slider and numeric input
+        blueFactorRange.addEventListener('input', () => {
+            const v = formatFactor(blueFactorRange.value);
+            blueFactorNumber.value = v;
+        });
+        blueFactorNumber.addEventListener('input', () => {
+            let v = parseFloat(blueFactorNumber.value);
+            if (isNaN(v)) { v = DEFAULT_BLUE_LIGHT_FACTOR; }
+            v = Math.min(Math.max(v, parseFloat(blueFactorNumber.min)), parseFloat(blueFactorNumber.max));
+            blueFactorNumber.value = formatFactor(v);
+            blueFactorRange.value = formatFactor(v);
+        });
+
+        // Accessibility: update aria-expanded on info button
+        factorInfoBtn.addEventListener('focus', () => factorInfoBtn.setAttribute('aria-expanded', 'true'));
+        factorInfoBtn.addEventListener('blur', () => factorInfoBtn.setAttribute('aria-expanded', 'false'));
+
+        // Google Maps Distance Matrix wrapper
+        async function getRealDriveTime(origin) {
+            return new Promise((resolve, reject) => {
+                if (!window.google || !window.google.maps) {
+                    reject("Google Maps API not loaded. Check internet connection and API key.");
+                    return;
+                }
+                const service = new google.maps.DistanceMatrixService();
+                service.getDistanceMatrix({
+                    origins: [origin],
+                    destinations: [TARGET_DESTINATION],
+                    travelMode: 'DRIVING',
+                    drivingOptions: {
+                        departureTime: new Date(),
+                        trafficModel: 'bestguess'
+                    },
+                    unitSystem: google.maps.UnitSystem.METRIC
+                }, (response, status) => {
+                    if (status !== 'OK') {
+                        reject("API Request Failed: " + status);
+                    } else {
+                        const rows = response.rows;
+                        if (rows.length > 0 && rows[0].elements.length > 0) {
+                            const element = rows[0].elements[0];
+                            if (element.status === 'OK') {
+                                const durationSec = element.duration_in_traffic ? element.duration_in_traffic.value : element.duration.value;
+                                resolve({ durationInSeconds: durationSec, valid: true });
+                            } else {
+                                resolve({ valid: false, reason: element.status });
+                            }
+                        } else {
+                            resolve({ valid: false, reason: "NO_DATA" });
+                        }
+                    }
+                });
+            });
+        }
+
+        // Basic UK postcode validation and normalization
+        function normalizePostcode(p) {
+            return p.toUpperCase().replace(/\s+/g, '');
+        }
+        function addSpaceToOutcodeInward(pc) {
+            return pc.replace(/^(.+)([0-9][A-Z]{2})$/i, (m, a, b) => `${a} ${b}`);
+        }
+        function validateUKPostcode(input) {
+            if (!input) return false;
+            const pc = input.trim().toUpperCase();
+            const postcodeRegex = /^([A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}|GIR\s?0AA|BFPO\s?\d{1,4})$/i;
+            return postcodeRegex.test(pc);
+        }
+
+        // UI result helpers
+        function showResult(title, message, isSuccess) {
+            resultContainer.classList.remove('result-success', 'result-fail');
+            resultContainer.classList.add(isSuccess ? 'result-success' : 'result-fail');
+            resultTitle.textContent = title;
+            resultDetails.textContent = message;
+            resultContainer.style.display = 'block';
+        }
+        function clearResult() {
+            resultContainer.style.display = 'none';
+            resultTitle.textContent = '';
+            resultDetails.textContent = '';
+        }
+
+        // Main controller
+        async function handleCheckDriveTime() {
+            clearResult();
+            const rawPostcode = postcodeInput.value.trim();
+
+            if (!rawPostcode) {
+                btnText.textContent = "Please enter a postcode.";
+                postcodeInput.focus();
+                setTimeout(() => { btnText.textContent = 'Check Drive Time'; }, 2000);
+                return;
+            }
+
+            if (!validateUKPostcode(rawPostcode)) {
+                postcodeInput.setAttribute('aria-invalid', 'true');
+                showResult('Invalid Postcode', 'Please enter a valid UK postcode (e.g. E14 9GE).', false);
+                postcodeInput.focus();
+                return;
+            } else {
+                postcodeInput.removeAttribute('aria-invalid');
+            }
+
+            setLoading(true);
+            try {
+                const normalized = addSpaceToOutcodeInward(normalizePostcode(rawPostcode));
+                const data = await getRealDriveTime(normalized);
+
+                if (!data.valid) {
+                    const errorMsg = (data.reason === 'NOT_FOUND' || data.reason === 'ZERO_RESULTS')
+                        ? "Postcode not found or no valid route could be determined."
+                        : `A calculation error occurred (${data.reason}).`;
+                    showResult("Error", errorMsg, false);
+                } else {
+                    const normalMinutes = Math.ceil(data.durationInSeconds / 60);
+                    const factor = parseFloat(blueFactorRange.value) || DEFAULT_BLUE_LIGHT_FACTOR;
+                    const blueLightMinutes = Math.ceil((data.durationInSeconds * factor) / 60);
+
+                    const details = [
+                        `Normal Estimated Drive Time: ${normalMinutes} min(s).`,
+                        `Blue Light Factor: ${formatFactor(factor)} (applied to normal time).`,
+                        `Estimated Blue Light Drive Time: ${blueLightMinutes} min(s).`,
+                        `Target Blue Light Response Time: ${TARGET_MINUTES} min(s).`
+                    ].join('\n');
+
+                    if (blueLightMinutes <= TARGET_MINUTES) {
+                        showResult('WITHIN TARGET', `${details}\n\nThis location meets the Blue Light response time target.`, true);
+                    } else {
+                        const failureMessage = `${details}\n\nEstimated Blue Light drive time exceeds the ${TARGET_MINUTES}-minute target. If the ECAT team is on the helipad, consider helicopter transport or alternative tasking.`;
+                        showResult('CRITICAL: DRIVE TIME EXCEEDED', failureMessage, false);
+                    }
+                }
+            } catch (err) {
+                console.error('System Error:', err);
+                showResult('System Error', 'Could not connect to Google Maps. Please ensure the API script is loaded and the key is valid.', false);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // Initialize displayed factor value
+        (function init() {
+            blueFactorNumber.value = formatFactor(blueFactorRange.value);
+        })();
+    </script>
+</body>
+</html>
