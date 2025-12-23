@@ -1,427 +1,419 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2867
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red70\green137\blue204;\red23\green24\blue24;\red140\green211\blue254;
-\red202\green202\blue202;\red109\green109\blue109;\red194\green126\blue101;\red109\green115\blue120;\red212\green212\blue212;
-\red113\green192\blue131;\red167\green197\blue152;\red183\green111\blue247;\red54\green192\blue160;\red246\green124\blue48;
-}
-{\*\expandedcolortbl;;\cssrgb\c33725\c61176\c83922;\cssrgb\c11765\c12157\c12549;\cssrgb\c61176\c86275\c99608;
-\cssrgb\c83137\c83137\c83137;\cssrgb\c50196\c50196\c50196;\cssrgb\c80784\c56863\c47059;\cssrgb\c50196\c52549\c54510;\cssrgb\c86275\c86275\c86275;
-\cssrgb\c50588\c78824\c58431;\cssrgb\c70980\c80784\c65882;\cssrgb\c77255\c54118\c97647;\cssrgb\c23922\c78824\c69020;\cssrgb\c98039\c56471\c24314;
-}
+{\colortbl;\red255\green255\blue255;\red70\green137\blue204;\red23\green24\blue24;}
+{\*\expandedcolortbl;;\cssrgb\c33725\c61176\c83922;\cssrgb\c11765\c12157\c12549;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
 \deftab720
 \pard\pardeftab720\partightenfactor0
 
 \f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 <!DOCTYPE\cf4 \strokec4  html\cf2 \strokec2 >\cf5 \cb1 \strokec5 \
-\cf6 \cb3 \strokec6 <\cf2 \strokec2 html\cf5 \strokec5  \cf4 \strokec4 lang\cf6 \strokec6 =\cf7 \strokec7 "en"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cf6 \cb3 \strokec6 <\cf2 \strokec2 head\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 meta\cf5 \strokec5  \cf4 \strokec4 charset\cf6 \strokec6 =\cf7 \strokec7 "UTF-8"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 meta\cf5 \strokec5  \cf4 \strokec4 name\cf6 \strokec6 =\cf7 \strokec7 "viewport"\cf5 \strokec5  \cf4 \strokec4 content\cf6 \strokec6 =\cf7 \strokec7 "width=device-width, initial-scale=1.0"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 title\cf6 \strokec6 >\cf5 \strokec5 ECAT Blue Light Response Checker (Real API)\cf6 \strokec6 </\cf2 \strokec2 title\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3     \cb1 \
-\cb3     \cf8 \strokec8 <!-- \cf5 \cb1 \strokec5 \
-\cf8 \cb3 \strokec8       REAL GOOGLE MAPS API SCRIPT\cf5 \cb1 \strokec5 \
-\cf8 \cb3 \strokec8       This loads the Distance Matrix library using the provided key.\cf5 \cb1 \strokec5 \
-\cf8 \cb3 \strokec8     -->\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 script\cf5 \strokec5  \cf4 \strokec4 async\cf5 \strokec5  \cf4 \strokec4 src\cf6 \strokec6 =\cf7 \strokec7 "https://maps.googleapis.com/maps/api/js?key=AIzaSyA-HPemyZUKc42MBLUbVD0JGuqffBpei94&libraries=places"\cf6 \strokec6 ></\cf2 \strokec2 script\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+\outl0\strokewidth0 \strokec2 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>ECAT Blue Light Response Checker (Real API)</title>\
+    \
+    <!-- \
+      REAL GOOGLE MAPS API SCRIPT\
+      This loads the Distance Matrix library using the provided key.\
+    -->\
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-HPemyZUKc42MBLUbVD0JGuqffBpei94&libraries=places"></script>\
 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 style\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3         \cf8 \strokec8 /* THEME CHANGE: Primary color set to Safety Orange */\cf5 \cb1 \strokec5 \
-\cb3         \cf2 \strokec2 :root\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 --primary-color:\cf5 \strokec5  #FF8C00\cf9 \strokec9 ;\cf5 \strokec5  \cf8 \strokec8 /* Safety Orange / Dark Amber */\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 --secondary-color:\cf5 \strokec5  #ffffff\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 --alert-red:\cf5 \strokec5  #d9002f\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 --success-green:\cf5 \strokec5  #007f3b\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 --bg-color:\cf5 \strokec5  #f0f4f5\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+    <style>\
+        /* THEME CHANGE: Primary color set to Safety Orange */\
+        :root \{\
+            --primary-color: #FF8C00; /* Safety Orange / Dark Amber */\
+            --secondary-color: #ffffff;\
+            --alert-red: #d9002f;\
+            --success-green: #007f3b;\
+            --bg-color: #f0f4f5;\
+        \}\
 \
-\cb3         \cf2 \strokec2 body\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-family:\cf5 \strokec5  \cf10 \strokec10 'Segoe UI'\cf9 \strokec9 ,\cf5 \strokec5  \cf7 \strokec7 Tahoma\cf9 \strokec9 ,\cf5 \strokec5  \cf7 \strokec7 Geneva\cf9 \strokec9 ,\cf5 \strokec5  \cf7 \strokec7 Verdana\cf9 \strokec9 ,\cf5 \strokec5  \cf7 \strokec7 sans-serif\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  \cf7 \strokec7 var(--bg-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin:\cf5 \strokec5  \cf11 \strokec11 0\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 0\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 display:\cf5 \strokec5  \cf7 \strokec7 flex\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 flex-direction:\cf5 \strokec5  \cf7 \strokec7 column\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 min-height:\cf5 \strokec5  \cf11 \strokec11 100vh\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  #333\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        body \{\
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\
+            background-color: var(--bg-color);\
+            margin: 0;\
+            padding: 0;\
+            display: flex;\
+            flex-direction: column;\
+            min-height: 100vh;\
+            color: #333;\
+        \}\
 \
-\cb3         \cf2 \strokec2 header\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  \cf7 \strokec7 var(--primary-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  \cf7 \strokec7 var(--secondary-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 1.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 text-align:\cf5 \strokec5  \cf7 \strokec7 center\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 box-shadow:\cf5 \strokec5  \cf11 \strokec11 0\cf5 \strokec5  \cf11 \strokec11 2px\cf5 \strokec5  \cf11 \strokec11 4px\cf5 \strokec5  \cf7 \strokec7 rgba(\cf11 \strokec11 0\cf9 \strokec9 ,\cf11 \strokec11 0\cf9 \strokec9 ,\cf11 \strokec11 0\cf9 \strokec9 ,\cf11 \strokec11 0.1\cf7 \strokec7 )\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        header \{\
+            background-color: var(--primary-color);\
+            color: var(--secondary-color);\
+            padding: 1.5rem;\
+            text-align: center;\
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\
+        \}\
 \
-\cb3         \cf2 \strokec2 h1\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin:\cf5 \strokec5  \cf11 \strokec11 0\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 1.8rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 display:\cf5 \strokec5  \cf7 \strokec7 flex\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 align-items:\cf5 \strokec5  \cf7 \strokec7 center\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 justify-content:\cf5 \strokec5  \cf7 \strokec7 center\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3         \cb1 \
-\cb3         \cf8 \strokec8 /* Style for the SVG icon */\cf5 \cb1 \strokec5 \
-\cb3         \cf2 \strokec2 .header-icon\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 stroke:\cf5 \strokec5  \cf7 \strokec7 var(--secondary-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 fill:\cf5 \strokec5  \cf7 \strokec7 none\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin:\cf5 \strokec5  \cf11 \strokec11 0\cf5 \strokec5  \cf11 \strokec11 10px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\
-\
-\cb3         \cf2 \strokec2 main\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 flex:\cf5 \strokec5  \cf11 \strokec11 1\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 display:\cf5 \strokec5  \cf7 \strokec7 flex\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 flex-direction:\cf5 \strokec5  \cf7 \strokec7 column\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 align-items:\cf5 \strokec5  \cf7 \strokec7 center\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 2rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 max-width:\cf5 \strokec5  \cf11 \strokec11 600px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin:\cf5 \strokec5  \cf11 \strokec11 0\cf5 \strokec5  \cf7 \strokec7 auto\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 width:\cf5 \strokec5  \cf11 \strokec11 100%\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 box-sizing:\cf5 \strokec5  \cf7 \strokec7 border-box\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\
-\cb3         \cf2 \strokec2 .card\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background:\cf5 \strokec5  \cf7 \strokec7 white\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 2rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border-radius:\cf5 \strokec5  \cf11 \strokec11 8px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 box-shadow:\cf5 \strokec5  \cf11 \strokec11 0\cf5 \strokec5  \cf11 \strokec11 4px\cf5 \strokec5  \cf11 \strokec11 6px\cf5 \strokec5  \cf7 \strokec7 rgba(\cf11 \strokec11 0\cf9 \strokec9 ,\cf11 \strokec11 0\cf9 \strokec9 ,\cf11 \strokec11 0\cf9 \strokec9 ,\cf11 \strokec11 0.05\cf7 \strokec7 )\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 width:\cf5 \strokec5  \cf11 \strokec11 100%\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-bottom:\cf5 \strokec5  \cf11 \strokec11 2rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\
-\cb3         \cf2 \strokec2 .info-panel\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  #e8edee\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf8 \strokec8 /* Changed border color to new primary theme color */\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border-left:\cf5 \strokec5  \cf11 \strokec11 5px\cf5 \strokec5  \cf7 \strokec7 solid\cf5 \strokec5  \cf7 \strokec7 var(--primary-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 1rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-bottom:\cf5 \strokec5  \cf11 \strokec11 1.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3         \cb1 \
-\cb3         \cf8 \strokec8 /* New style for the disclaimer box */\cf5 \cb1 \strokec5 \
-\cb3         \cf2 \strokec2 .disclaimer-panel\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  #fff3e0\cf9 \strokec9 ;\cf5 \strokec5  \cf8 \strokec8 /* Light orange background */\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border:\cf5 \strokec5  \cf11 \strokec11 1px\cf5 \strokec5  \cf7 \strokec7 solid\cf5 \strokec5  \cf7 \strokec7 var(--primary-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border-radius:\cf5 \strokec5  \cf11 \strokec11 4px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 1rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-bottom:\cf5 \strokec5  \cf11 \strokec11 1.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 0.9rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  #444\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3         \cf2 \strokec2 .disclaimer-panel\cf5 \strokec5  \cf2 \strokec2 strong\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  #333\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-weight:\cf5 \strokec5  \cf11 \strokec11 700\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        h1 \{\
+            margin: 0;\
+            font-size: 1.8rem;\
+            display: flex;\
+            align-items: center;\
+            justify-content: center;\
+        \}\
+        \
+        /* Style for the SVG icon */\
+        .header-icon \{\
+            stroke: var(--secondary-color);\
+            fill: none;\
+            margin: 0 10px;\
+        \}\
 \
 \
-\cb3         \cf2 \strokec2 .info-item\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-bottom:\cf5 \strokec5  \cf11 \strokec11 0.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 0.95rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        main \{\
+            flex: 1;\
+            display: flex;\
+            flex-direction: column;\
+            align-items: center;\
+            padding: 2rem;\
+            max-width: 600px;\
+            margin: 0 auto;\
+            width: 100%;\
+            box-sizing: border-box;\
+        \}\
 \
-\cb3         \cf2 \strokec2 .info-item\cf5 \strokec5  \cf2 \strokec2 strong\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  #333\cf9 \strokec9 ;\cf5 \strokec5  \cf8 \strokec8 /* Keep strong text readable */\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        .card \{\
+            background: white;\
+            padding: 2rem;\
+            border-radius: 8px;\
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);\
+            width: 100%;\
+            margin-bottom: 2rem;\
+        \}\
 \
-\cb3         \cf2 \strokec2 label\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 display:\cf5 \strokec5  \cf7 \strokec7 block\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-bottom:\cf5 \strokec5  \cf11 \strokec11 0.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-weight:\cf5 \strokec5  \cf7 \strokec7 bold\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        .info-panel \{\
+            background-color: #e8edee;\
+            /* Changed border color to new primary theme color */\
+            border-left: 5px solid var(--primary-color);\
+            padding: 1rem;\
+            margin-bottom: 1.5rem;\
+        \}\
+        \
+        /* New style for the disclaimer box */\
+        .disclaimer-panel \{\
+            background-color: #fff3e0; /* Light orange background */\
+            border: 1px solid var(--primary-color);\
+            border-radius: 4px;\
+            padding: 1rem;\
+            margin-bottom: 1.5rem;\
+            font-size: 0.9rem;\
+            color: #444;\
+        \}\
+        .disclaimer-panel strong \{\
+            color: #333;\
+            font-weight: 700;\
+        \}\
 \
-\cb3         \cf2 \strokec2 input\cf9 \strokec9 [\cf7 \strokec7 type\cf9 \strokec9 =\cf10 \strokec10 "text"\cf9 \strokec9 ]\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 width:\cf5 \strokec5  \cf11 \strokec11 100%\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 12px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border:\cf5 \strokec5  \cf11 \strokec11 2px\cf5 \strokec5  \cf7 \strokec7 solid\cf5 \strokec5  #ccc\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border-radius:\cf5 \strokec5  \cf11 \strokec11 4px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 1rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 box-sizing:\cf5 \strokec5  \cf7 \strokec7 border-box\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-bottom:\cf5 \strokec5  \cf11 \strokec11 1rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
 \
-\cb3         \cf2 \strokec2 input\cf9 \strokec9 [\cf7 \strokec7 type\cf9 \strokec9 =\cf10 \strokec10 "text"\cf9 \strokec9 ]\cf2 \strokec2 :focus\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border-color:\cf5 \strokec5  \cf7 \strokec7 var(--primary-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 outline:\cf5 \strokec5  \cf7 \strokec7 none\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        .info-item \{\
+            margin-bottom: 0.5rem;\
+            font-size: 0.95rem;\
+        \}\
 \
-\cb3         \cf2 \strokec2 button\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 width:\cf5 \strokec5  \cf11 \strokec11 100%\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 14px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf8 \strokec8 /* Button background uses new primary theme color */\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  \cf7 \strokec7 var(--primary-color)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  \cf7 \strokec7 white\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border:\cf5 \strokec5  \cf7 \strokec7 none\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border-radius:\cf5 \strokec5  \cf11 \strokec11 4px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 1.1rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-weight:\cf5 \strokec5  \cf7 \strokec7 bold\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 cursor:\cf5 \strokec5  \cf7 \strokec7 pointer\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 transition:\cf5 \strokec5  \cf7 \strokec7 background-color\cf5 \strokec5  \cf11 \strokec11 0.2s\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        .info-item strong \{\
+            color: #333; /* Keep strong text readable */\
+        \}\
 \
-\cb3         \cf2 \strokec2 button:hover\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  #e07b00\cf9 \strokec9 ;\cf5 \strokec5  \cf8 \strokec8 /* Slightly darker orange on hover */\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        label \{\
+            display: block;\
+            margin-bottom: 0.5rem;\
+            font-weight: bold;\
+        \}\
 \
-\cb3         \cf2 \strokec2 button:disabled\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  #999\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 cursor:\cf5 \strokec5  \cf7 \strokec7 not-allowed\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        input[type="text"] \{\
+            width: 100%;\
+            padding: 12px;\
+            border: 2px solid #ccc;\
+            border-radius: 4px;\
+            font-size: 1rem;\
+            box-sizing: border-box;\
+            margin-bottom: 1rem;\
+        \}\
 \
-\cb3         \cf2 \strokec2 #result-container\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-top:\cf5 \strokec5  \cf11 \strokec11 1.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 display:\cf5 \strokec5  \cf7 \strokec7 none\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 1.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border-radius:\cf5 \strokec5  \cf11 \strokec11 6px\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 text-align:\cf5 \strokec5  \cf7 \strokec7 center\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        input[type="text"]:focus \{\
+            border-color: var(--primary-color);\
+            outline: none;\
+        \}\
 \
-\cb3         \cf2 \strokec2 .result-success\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  #e6f4ea\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border:\cf5 \strokec5  \cf11 \strokec11 2px\cf5 \strokec5  \cf7 \strokec7 solid\cf5 \strokec5  \cf7 \strokec7 var(--success-green)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  \cf7 \strokec7 var(--success-green)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        button \{\
+            width: 100%;\
+            padding: 14px;\
+            /* Button background uses new primary theme color */\
+            background-color: var(--primary-color);\
+            color: white;\
+            border: none;\
+            border-radius: 4px;\
+            font-size: 1.1rem;\
+            font-weight: bold;\
+            cursor: pointer;\
+            transition: background-color 0.2s;\
+        \}\
 \
-\cb3         \cf8 \strokec8 /* Failure result (outside target) uses the red alert color for high visibility */\cf5 \cb1 \strokec5 \
-\cb3         \cf2 \strokec2 .result-fail\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  #fce8e8\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 border:\cf5 \strokec5  \cf11 \strokec11 2px\cf5 \strokec5  \cf7 \strokec7 solid\cf5 \strokec5  \cf7 \strokec7 var(--alert-red)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  \cf7 \strokec7 var(--alert-red)\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3         \cb1 \
-\cb3         \cf8 \strokec8 /* Specific styling for the critical failure message to make it bold */\cf5 \cb1 \strokec5 \
-\cb3         \cf2 \strokec2 .result-fail\cf5 \strokec5  \cf2 \strokec2 .result-title\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 1.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 text-transform:\cf5 \strokec5  \cf7 \strokec7 uppercase\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        button:hover \{\
+            background-color: #e07b00; /* Slightly darker orange on hover */\
+        \}\
 \
-\cb3         \cf2 \strokec2 .result-title\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 1.4rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-weight:\cf5 \strokec5  \cf7 \strokec7 bold\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-bottom:\cf5 \strokec5  \cf11 \strokec11 0.5rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        button:disabled \{\
+            background-color: #999;\
+            cursor: not-allowed;\
+        \}\
 \
-\cb3         \cf2 \strokec2 .result-time\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 1.1rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 line-height:\cf5 \strokec5  \cf11 \strokec11 1.5\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        #result-container \{\
+            margin-top: 1.5rem;\
+            display: none;\
+            padding: 1.5rem;\
+            border-radius: 6px;\
+            text-align: center;\
+        \}\
 \
-\cb3         \cf2 \strokec2 footer\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 background-color:\cf5 \strokec5  #333\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  #ccc\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 text-align:\cf5 \strokec5  \cf7 \strokec7 center\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 padding:\cf5 \strokec5  \cf11 \strokec11 1rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 font-size:\cf5 \strokec5  \cf11 \strokec11 0.9rem\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 margin-top:\cf5 \strokec5  \cf7 \strokec7 auto\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        .result-success \{\
+            background-color: #e6f4ea;\
+            border: 2px solid var(--success-green);\
+            color: var(--success-green);\
+        \}\
 \
-\cb3         \cf2 \strokec2 footer\cf5 \strokec5  \cf2 \strokec2 a\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 color:\cf5 \strokec5  \cf7 \strokec7 white\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf4 \strokec4 text-decoration:\cf5 \strokec5  \cf7 \strokec7 underline\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 </\cf2 \strokec2 style\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cf6 \cb3 \strokec6 </\cf2 \strokec2 head\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cf6 \cb3 \strokec6 <\cf2 \strokec2 body\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+        /* Failure result (outside target) uses the red alert color for high visibility */\
+        .result-fail \{\
+            background-color: #fce8e8;\
+            border: 2px solid var(--alert-red);\
+            color: var(--alert-red);\
+        \}\
+        \
+        /* Specific styling for the critical failure message to make it bold */\
+        .result-fail .result-title \{\
+            font-size: 1.5rem;\
+            text-transform: uppercase;\
+        \}\
 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 header\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3         \cf8 \strokec8 <!-- London Air Ambulance/ECAT Theme Icon -->\cf5 \cb1 \strokec5 \
-\cb3         \cf6 \strokec6 <\cf2 \strokec2 h1\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3             \cf8 \strokec8 <!-- Simple Helicopter Icon (SVG) -->\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 <\cf2 \strokec2 svg\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "header-icon"\cf5 \strokec5  \cf4 \strokec4 viewBox\cf6 \strokec6 =\cf7 \strokec7 "0 0 24 24"\cf5 \strokec5  \cf4 \strokec4 stroke-width\cf6 \strokec6 =\cf7 \strokec7 "2"\cf5 \strokec5  \cf4 \strokec4 stroke-linecap\cf6 \strokec6 =\cf7 \strokec7 "round"\cf5 \strokec5  \cf4 \strokec4 stroke-linejoin\cf6 \strokec6 =\cf7 \strokec7 "round"\cf5 \strokec5  \cf4 \strokec4 width\cf6 \strokec6 =\cf7 \strokec7 "28"\cf5 \strokec5  \cf4 \strokec4 height\cf6 \strokec6 =\cf7 \strokec7 "28"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 path\cf5 \strokec5  \cf4 \strokec4 d\cf6 \strokec6 =\cf7 \strokec7 "M17 10H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2z"\cf6 \strokec6 />\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 path\cf5 \strokec5  \cf4 \strokec4 d\cf6 \strokec6 =\cf7 \strokec7 "M10 10v7a2 2 0 0 0 2 2h3"\cf6 \strokec6 />\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 path\cf5 \strokec5  \cf4 \strokec4 d\cf6 \strokec6 =\cf7 \strokec7 "M15 17h6"\cf6 \strokec6 />\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 path\cf5 \strokec5  \cf4 \strokec4 d\cf6 \strokec6 =\cf7 \strokec7 "M10 10v-3"\cf6 \strokec6 />\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 path\cf5 \strokec5  \cf4 \strokec4 d\cf6 \strokec6 =\cf7 \strokec7 "M15 4h-5"\cf6 \strokec6 />\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 path\cf5 \strokec5  \cf4 \strokec4 d\cf6 \strokec6 =\cf7 \strokec7 "M19 19H5"\cf6 \strokec6 />\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 path\cf5 \strokec5  \cf4 \strokec4 d\cf6 \strokec6 =\cf7 \strokec7 "M12 22a2 2 0 0 1-2-2v-3"\cf6 \strokec6 />\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 </\cf2 \strokec2 svg\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3             ECAT Blue Light Response Checker\cb1 \
-\cb3         \cf6 \strokec6 </\cf2 \strokec2 h1\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 </\cf2 \strokec2 header\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+        .result-title \{\
+            font-size: 1.4rem;\
+            font-weight: bold;\
+            margin-bottom: 0.5rem;\
+        \}\
 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 main\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3         \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "card"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3             \cf8 \strokec8 <!-- Static Information -->\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "info-panel"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "info-item"\cf6 \strokec6 ><\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \strokec5 Fixed Destination:\cf6 \strokec6 </\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \strokec5  The Royal London Hospital, E1 1BB\cf6 \strokec6 </\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "info-item"\cf6 \strokec6 ><\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \strokec5 Target Response Time:\cf6 \strokec6 </\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \strokec5  &le; 25 Minutes\cf6 \strokec6 </\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 </\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+        .result-time \{\
+            font-size: 1.1rem;\
+            line-height: 1.5;\
+        \}\
 \
-\cb3             \cf8 \strokec8 <!-- New Disclaimer Section -->\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "disclaimer-panel"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \strokec5 Disclaimer:\cf6 \strokec6 </\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \strokec5  This tool uses Google Maps' real-time traffic data to provide drive time estimations. This information is intended to *assist* decision-making only. The final decision regarding the mode of transport and dispatch must remain at the discretion of the clinician on the HEMS desk.\cb1 \
-\cb3             \cf6 \strokec6 </\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+        footer \{\
+            background-color: #333;\
+            color: #ccc;\
+            text-align: center;\
+            padding: 1rem;\
+            font-size: 0.9rem;\
+            margin-top: auto;\
+        \}\
 \
-\cb3             \cf8 \strokec8 <!-- User Input -->\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 <\cf2 \strokec2 label\cf5 \strokec5  \cf4 \strokec4 for\cf6 \strokec6 =\cf7 \strokec7 "postcode-input"\cf6 \strokec6 >\cf5 \strokec5 Enter Incident Location Postcode\cf6 \strokec6 </\cf2 \strokec2 label\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 <\cf2 \strokec2 input\cf5 \strokec5  \cf4 \strokec4 type\cf6 \strokec6 =\cf7 \strokec7 "text"\cf5 \strokec5  \cf4 \strokec4 id\cf6 \strokec6 =\cf7 \strokec7 "postcode-input"\cf5 \strokec5  \cf4 \strokec4 placeholder\cf6 \strokec6 =\cf7 \strokec7 "e.g. E14 9GE"\cf5 \strokec5  \cf4 \strokec4 aria-label\cf6 \strokec6 =\cf7 \strokec7 "Enter Incident Location Postcode"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3             \cb1 \
-\cb3             \cf6 \strokec6 <\cf2 \strokec2 button\cf5 \strokec5  \cf4 \strokec4 id\cf6 \strokec6 =\cf7 \strokec7 "check-btn"\cf5 \strokec5  \cf4 \strokec4 onclick\cf6 \strokec6 =\cf7 \strokec7 "handleCheckDriveTime()"\cf6 \strokec6 >\cf5 \strokec5 Check Drive Time\cf6 \strokec6 </\cf2 \strokec2 button\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+        footer a \{\
+            color: white;\
+            text-decoration: underline;\
+        \}\
+    </style>\
+</head>\
+<body>\
 \
-\cb3             \cf8 \strokec8 <!-- Output Display -->\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 id\cf6 \strokec6 =\cf7 \strokec7 "result-container"\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "result-title"\cf5 \strokec5  \cf4 \strokec4 id\cf6 \strokec6 =\cf7 \strokec7 "result-title"\cf6 \strokec6 ></\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3                 \cf6 \strokec6 <\cf2 \strokec2 div\cf5 \strokec5  \cf4 \strokec4 class\cf6 \strokec6 =\cf7 \strokec7 "result-time"\cf5 \strokec5  \cf4 \strokec4 id\cf6 \strokec6 =\cf7 \strokec7 "result-details"\cf6 \strokec6 ></\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3             \cf6 \strokec6 </\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3         \cf6 \strokec6 </\cf2 \strokec2 div\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 </\cf2 \strokec2 main\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+    <header>\
+        <!-- London Air Ambulance/ECAT Theme Icon -->\
+        <h1>\
+            <!-- Simple Helicopter Icon (SVG) -->\
+            <svg class="header-icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">\
+                <path d="M17 10H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2z"/>\
+                <path d="M10 10v7a2 2 0 0 0 2 2h3"/>\
+                <path d="M15 17h6"/>\
+                <path d="M10 10v-3"/>\
+                <path d="M15 4h-5"/>\
+                <path d="M19 19H5"/>\
+                <path d="M12 22a2 2 0 0 1-2-2v-3"/>\
+            </svg>\
+            ECAT Blue Light Response Checker\
+        </h1>\
+    </header>\
 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 footer\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3         \cf8 \strokec8 <!-- Updated Contact Info: Text is now wrapped in strong for better visibility -->\cf5 \cb1 \strokec5 \
-\cb3         \cf6 \strokec6 <\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \strokec5 Please report any issues with this web app to lead paramedic and \cf6 \strokec6 <\cf2 \strokec2 a\cf5 \strokec5  \cf4 \strokec4 href\cf6 \strokec6 =\cf7 \strokec7 "mailto:Gregory.welch@nhs.net"\cf6 \strokec6 >\cf5 \strokec5 Gregory.welch@nhs.net\cf6 \strokec6 </\cf2 \strokec2 a\cf6 \strokec6 ></\cf2 \strokec2 strong\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 </\cf2 \strokec2 footer\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+    <main>\
+        <div class="card">\
+            <!-- Static Information -->\
+            <div class="info-panel">\
+                <div class="info-item"><strong>Fixed Destination:</strong> The Royal London Hospital, E1 1BB</div>\
+                <div class="info-item"><strong>Target Response Time:</strong> &le; 25 Minutes</div>\
+            </div>\
 \
-\cb3     \cf6 \strokec6 <\cf2 \strokec2 script\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cb3         \cf8 \strokec8 // CONFIGURATION\cf5 \cb1 \strokec5 \
-\cb3         \cf12 \strokec12 const\cf5 \strokec5  \cf13 \strokec13 TARGET_DESTINATION\cf5 \strokec5  \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 "The Royal London Hospital, E1 1BB, UK"\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf12 \strokec12 const\cf5 \strokec5  \cf13 \strokec13 TARGET_MINUTES\cf5 \strokec5  \cf9 \strokec9 =\cf5 \strokec5  \cf14 \strokec14 25\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
+            <!-- New Disclaimer Section -->\
+            <div class="disclaimer-panel">\
+                <strong>Disclaimer:</strong> This tool uses Google Maps' real-time traffic data to provide drive time estimations. This information is intended to *assist* decision-making only. The final decision regarding the mode of transport and dispatch must remain at the discretion of the clinician on the HEMS desk.\
+            </div>\
 \
-\cb3         \cf8 \strokec8 // --- REAL GOOGLE API FUNCTION ---\cf5 \cb1 \strokec5 \
-\cb3         \cf8 \strokec8 // This function wraps the Google Maps Distance Matrix Service in a Promise\cf5 \cb1 \strokec5 \
-\cb3         \cf8 \strokec8 // so we can use modern async/await syntax.\cf5 \cb1 \strokec5 \
-\cb3         \cf12 \strokec12 async\cf5 \strokec5  \cf12 \strokec12 function\cf5 \strokec5  getRealDriveTime\cf9 \strokec9 (\cf5 \strokec5 origin\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cb1 \
-\cb3             \cf12 \strokec12 return\cf5 \strokec5  \cf12 \strokec12 new\cf5 \strokec5  \cf13 \strokec13 Promise\cf9 \strokec9 ((\cf5 \strokec5 resolve\cf9 \strokec9 ,\cf5 \strokec5  reject\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 =>\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                 \cf8 \strokec8 // check if API loaded\cf5 \cb1 \strokec5 \
-\cb3                 \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (!\cf5 \strokec5 window\cf9 \strokec9 .\cf5 \strokec5 google \cf9 \strokec9 ||\cf5 \strokec5  \cf9 \strokec9 !\cf5 \strokec5 window\cf9 \strokec9 .\cf5 \strokec5 google\cf9 \strokec9 .\cf5 \strokec5 maps\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                     reject\cf9 \strokec9 (\cf10 \strokec10 "Google Maps API not loaded. Check internet connection and API key."\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                     \cf12 \strokec12 return\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                 \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+            <!-- User Input -->\
+            <label for="postcode-input">Enter Incident Location Postcode</label>\
+            <input type="text" id="postcode-input" placeholder="e.g. E14 9GE" aria-label="Enter Incident Location Postcode">\
+            \
+            <button id="check-btn" onclick="handleCheckDriveTime()">Check Drive Time</button>\
 \
-\cb3                 \cf12 \strokec12 const\cf5 \strokec5  service \cf9 \strokec9 =\cf5 \strokec5  \cf12 \strokec12 new\cf5 \strokec5  google\cf9 \strokec9 .\cf5 \strokec5 maps\cf9 \strokec9 .\cf13 \strokec13 DistanceMatrixService\cf9 \strokec9 ();\cf5 \cb1 \strokec5 \
-\cb3                 \cb1 \
-\cb3                 service\cf9 \strokec9 .\cf5 \strokec5 getDistanceMatrix\cf9 \strokec9 (\cf5 \cb1 \strokec5 \
-\cb3                     \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                         origins\cf9 \strokec9 :\cf5 \strokec5  \cf9 \strokec9 [\cf5 \strokec5 origin\cf9 \strokec9 ],\cf5 \cb1 \strokec5 \
-\cb3                         destinations\cf9 \strokec9 :\cf5 \strokec5  \cf9 \strokec9 [\cf13 \strokec13 TARGET_DESTINATION\cf9 \strokec9 ],\cf5 \cb1 \strokec5 \
-\cb3                         travelMode\cf9 \strokec9 :\cf5 \strokec5  \cf10 \strokec10 'DRIVING'\cf9 \strokec9 ,\cf5 \cb1 \strokec5 \
-\cb3                         drivingOptions\cf9 \strokec9 :\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                             departureTime\cf9 \strokec9 :\cf5 \strokec5  \cf12 \strokec12 new\cf5 \strokec5  \cf13 \strokec13 Date\cf9 \strokec9 (),\cf5 \strokec5  \cf8 \strokec8 // Request real-time traffic info\cf5 \cb1 \strokec5 \
-\cb3                             trafficModel\cf9 \strokec9 :\cf5 \strokec5  \cf10 \strokec10 'bestguess'\cf5 \cb1 \strokec5 \
-\cb3                         \cf9 \strokec9 \},\cf5 \cb1 \strokec5 \
-\cb3                         unitSystem\cf9 \strokec9 :\cf5 \strokec5  google\cf9 \strokec9 .\cf5 \strokec5 maps\cf9 \strokec9 .\cf13 \strokec13 UnitSystem\cf9 \strokec9 .\cf13 \strokec13 METRIC\cf5 \cb1 \strokec5 \
-\cb3                     \cf9 \strokec9 \},\cf5 \strokec5  \cb1 \
-\cb3                     \cf9 \strokec9 (\cf5 \strokec5 response\cf9 \strokec9 ,\cf5 \strokec5  status\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 =>\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                         \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (\cf5 \strokec5 status \cf9 \strokec9 !==\cf5 \strokec5  \cf10 \strokec10 'OK'\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                             reject\cf9 \strokec9 (\cf10 \strokec10 "API Request Failed: "\cf5 \strokec5  \cf9 \strokec9 +\cf5 \strokec5  status\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                         \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 else\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                             \cf8 \strokec8 // Check if the specific element was found\cf5 \cb1 \strokec5 \
-\cb3                             \cf12 \strokec12 const\cf5 \strokec5  rows \cf9 \strokec9 =\cf5 \strokec5  response\cf9 \strokec9 .\cf5 \strokec5 rows\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                             \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (\cf5 \strokec5 rows\cf9 \strokec9 .\cf5 \strokec5 length \cf9 \strokec9 >\cf5 \strokec5  \cf14 \strokec14 0\cf5 \strokec5  \cf9 \strokec9 &&\cf5 \strokec5  rows\cf9 \strokec9 [\cf14 \strokec14 0\cf9 \strokec9 ].\cf5 \strokec5 elements\cf9 \strokec9 .\cf5 \strokec5 length \cf9 \strokec9 >\cf5 \strokec5  \cf14 \strokec14 0\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                                 \cf12 \strokec12 const\cf5 \strokec5  element \cf9 \strokec9 =\cf5 \strokec5  rows\cf9 \strokec9 [\cf14 \strokec14 0\cf9 \strokec9 ].\cf5 \strokec5 elements\cf9 \strokec9 [\cf14 \strokec14 0\cf9 \strokec9 ];\cf5 \cb1 \strokec5 \
-\cb3                                 \cb1 \
-\cb3                                 \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (\cf5 \strokec5 element\cf9 \strokec9 .\cf5 \strokec5 status \cf9 \strokec9 ===\cf5 \strokec5  \cf10 \strokec10 'OK'\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                                     \cf8 \strokec8 // Use duration_in_traffic if available (real-time), otherwise standard duration\cf5 \cb1 \strokec5 \
-\cb3                                     \cf12 \strokec12 const\cf5 \strokec5  durationSec \cf9 \strokec9 =\cf5 \strokec5  element\cf9 \strokec9 .\cf5 \strokec5 duration_in_traffic \cb1 \
-\cb3                                         \cf9 \strokec9 ?\cf5 \strokec5  element\cf9 \strokec9 .\cf5 \strokec5 duration_in_traffic\cf9 \strokec9 .\cf5 \strokec5 value \cb1 \
-\cb3                                         \cf9 \strokec9 :\cf5 \strokec5  element\cf9 \strokec9 .\cf5 \strokec5 duration\cf9 \strokec9 .\cf5 \strokec5 value\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                                     \cb1 \
-\cb3                                     resolve\cf9 \strokec9 (\{\cf5 \cb1 \strokec5 \
-\cb3                                         durationInSeconds\cf9 \strokec9 :\cf5 \strokec5  durationSec\cf9 \strokec9 ,\cf5 \cb1 \strokec5 \
-\cb3                                         valid\cf9 \strokec9 :\cf5 \strokec5  \cf12 \strokec12 true\cf5 \cb1 \strokec5 \
-\cb3                                     \cf9 \strokec9 \});\cf5 \cb1 \strokec5 \
-\cb3                                 \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 else\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                                     \cf8 \strokec8 // ZERO_RESULTS usually means the postcode was invalid or route impossible\cf5 \cb1 \strokec5 \
-\cb3                                     resolve\cf9 \strokec9 (\{\cf5 \strokec5  valid\cf9 \strokec9 :\cf5 \strokec5  \cf12 \strokec12 false\cf9 \strokec9 ,\cf5 \strokec5  reason\cf9 \strokec9 :\cf5 \strokec5  element\cf9 \strokec9 .\cf5 \strokec5 status \cf9 \strokec9 \});\cf5 \cb1 \strokec5 \
-\cb3                                 \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3                             \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 else\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                                 resolve\cf9 \strokec9 (\{\cf5 \strokec5  valid\cf9 \strokec9 :\cf5 \strokec5  \cf12 \strokec12 false\cf9 \strokec9 ,\cf5 \strokec5  reason\cf9 \strokec9 :\cf5 \strokec5  \cf10 \strokec10 "NO_DATA"\cf5 \strokec5  \cf9 \strokec9 \});\cf5 \cb1 \strokec5 \
-\cb3                             \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3                         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3                     \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3                 \cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf9 \strokec9 \});\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+            <!-- Output Display -->\
+            <div id="result-container">\
+                <div class="result-title" id="result-title"></div>\
+                <div class="result-time" id="result-details"></div>\
+            </div>\
+        </div>\
+    </main>\
 \
-\cb3         \cf8 \strokec8 // --- MAIN LOGIC CONTROLLER ---\cf5 \cb1 \strokec5 \
-\cb3         \cf12 \strokec12 async\cf5 \strokec5  \cf12 \strokec12 function\cf5 \strokec5  handleCheckDriveTime\cf9 \strokec9 ()\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 const\cf5 \strokec5  inputField \cf9 \strokec9 =\cf5 \strokec5  document\cf9 \strokec9 .\cf5 \strokec5 getElementById\cf9 \strokec9 (\cf10 \strokec10 'postcode-input'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 const\cf5 \strokec5  resultContainer \cf9 \strokec9 =\cf5 \strokec5  document\cf9 \strokec9 .\cf5 \strokec5 getElementById\cf9 \strokec9 (\cf10 \strokec10 'result-container'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 const\cf5 \strokec5  btn \cf9 \strokec9 =\cf5 \strokec5  document\cf9 \strokec9 .\cf5 \strokec5 getElementById\cf9 \strokec9 (\cf10 \strokec10 'check-btn'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cb1 \
-\cb3             \cf8 \strokec8 // Replaced alert with a check for empty input\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 const\cf5 \strokec5  postcode \cf9 \strokec9 =\cf5 \strokec5  inputField\cf9 \strokec9 .\cf5 \strokec5 value\cf9 \strokec9 .\cf5 \strokec5 trim\cf9 \strokec9 ();\cf5 \cb1 \strokec5 \
+    <footer>\
+        <!-- Updated Contact Info: Text is now wrapped in strong for better visibility -->\
+        <strong>Please report any issues with this web app to lead paramedic and <a href="mailto:Gregory.welch@nhs.net">Gregory.welch@nhs.net</a></strong>\
+    </footer>\
 \
-\cb3             \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (!\cf5 \strokec5 postcode\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                 \cf8 \strokec8 // Simple non-blocking message if input is empty\cf5 \cb1 \strokec5 \
-\cb3                 btn\cf9 \strokec9 .\cf5 \strokec5 innerText \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 "Please enter a postcode."\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                 setTimeout\cf9 \strokec9 (()\cf5 \strokec5  \cf9 \strokec9 =>\cf5 \strokec5  btn\cf9 \strokec9 .\cf5 \strokec5 innerText \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 "Check Drive Time"\cf9 \strokec9 ,\cf5 \strokec5  \cf14 \strokec14 2000\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                 \cf12 \strokec12 return\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+    <script>\
+        // CONFIGURATION\
+        const TARGET_DESTINATION = "The Royal London Hospital, E1 1BB, UK";\
+        const TARGET_MINUTES = 25;\
 \
-\cb3             \cf8 \strokec8 // 2. UI Updates (Loading State)\cf5 \cb1 \strokec5 \
-\cb3             btn\cf9 \strokec9 .\cf5 \strokec5 disabled \cf9 \strokec9 =\cf5 \strokec5  \cf12 \strokec12 true\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             btn\cf9 \strokec9 .\cf5 \strokec5 innerText \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 "Calculating real-time traffic..."\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             resultContainer\cf9 \strokec9 .\cf5 \strokec5 style\cf9 \strokec9 .\cf5 \strokec5 display \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 'none'\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
+        // --- REAL GOOGLE API FUNCTION ---\
+        // This function wraps the Google Maps Distance Matrix Service in a Promise\
+        // so we can use modern async/await syntax.\
+        async function getRealDriveTime(origin) \{\
+            \
+            return new Promise((resolve, reject) => \{\
+                // check if API loaded\
+                if (!window.google || !window.google.maps) \{\
+                    reject("Google Maps API not loaded. Check internet connection and API key.");\
+                    return;\
+                \}\
 \
-\cb3             \cf12 \strokec12 try\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                 \cf8 \strokec8 // 3. Call the Real API\cf5 \cb1 \strokec5 \
-\cb3                 \cf12 \strokec12 const\cf5 \strokec5  data \cf9 \strokec9 =\cf5 \strokec5  \cf12 \strokec12 await\cf5 \strokec5  getRealDriveTime\cf9 \strokec9 (\cf5 \strokec5 postcode\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
+                const service = new google.maps.DistanceMatrixService();\
+                \
+                service.getDistanceMatrix(\
+                    \{\
+                        origins: [origin],\
+                        destinations: [TARGET_DESTINATION],\
+                        travelMode: 'DRIVING',\
+                        drivingOptions: \{\
+                            departureTime: new Date(), // Request real-time traffic info\
+                            trafficModel: 'bestguess'\
+                        \},\
+                        unitSystem: google.maps.UnitSystem.METRIC\
+                    \}, \
+                    (response, status) => \{\
+                        if (status !== 'OK') \{\
+                            reject("API Request Failed: " + status);\
+                        \} else \{\
+                            // Check if the specific element was found\
+                            const rows = response.rows;\
+                            if (rows.length > 0 && rows[0].elements.length > 0) \{\
+                                const element = rows[0].elements[0];\
+                                \
+                                if (element.status === 'OK') \{\
+                                    // Use duration_in_traffic if available (real-time), otherwise standard duration\
+                                    const durationSec = element.duration_in_traffic \
+                                        ? element.duration_in_traffic.value \
+                                        : element.duration.value;\
+                                    \
+                                    resolve(\{\
+                                        durationInSeconds: durationSec,\
+                                        valid: true\
+                                    \});\
+                                \} else \{\
+                                    // ZERO_RESULTS usually means the postcode was invalid or route impossible\
+                                    resolve(\{ valid: false, reason: element.status \});\
+                                \}\
+                            \} else \{\
+                                resolve(\{ valid: false, reason: "NO_DATA" \});\
+                            \}\
+                        \}\
+                    \}\
+                );\
+            \});\
+        \}\
 \
-\cb3                 \cf8 \strokec8 // 4. Process Results\cf5 \cb1 \strokec5 \
-\cb3                 \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (!\cf5 \strokec5 data\cf9 \strokec9 .\cf5 \strokec5 valid\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                     \cf12 \strokec12 const\cf5 \strokec5  errorMsg \cf9 \strokec9 =\cf5 \strokec5  data\cf9 \strokec9 .\cf5 \strokec5 reason \cf9 \strokec9 ===\cf5 \strokec5  \cf10 \strokec10 'NOT_FOUND'\cf5 \strokec5  \cf9 \strokec9 ||\cf5 \strokec5  data\cf9 \strokec9 .\cf5 \strokec5 reason \cf9 \strokec9 ===\cf5 \strokec5  \cf10 \strokec10 'ZERO_RESULTS'\cf5 \strokec5  \cb1 \
-\cb3                         \cf9 \strokec9 ?\cf5 \strokec5  \cf10 \strokec10 "Postcode not found or no valid route could be determined."\cf5 \strokec5  \cb1 \
-\cb3                         \cf9 \strokec9 :\cf5 \strokec5  \cf10 \strokec10 "A calculation error occurred."\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                     \cb1 \
-\cb3                     showResult\cf9 \strokec9 (\cf10 \strokec10 "Error"\cf9 \strokec9 ,\cf5 \strokec5  errorMsg\cf9 \strokec9 ,\cf5 \strokec5  \cf12 \strokec12 false\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                 \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 else\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                     \cf8 \strokec8 // Convert seconds to minutes (rounding up is safer for "response time" estimates)\cf5 \cb1 \strokec5 \
-\cb3                     \cf12 \strokec12 const\cf5 \strokec5  minutes \cf9 \strokec9 =\cf5 \strokec5  \cf13 \strokec13 Math\cf9 \strokec9 .\cf5 \strokec5 ceil\cf9 \strokec9 (\cf5 \strokec5 data\cf9 \strokec9 .\cf5 \strokec5 durationInSeconds \cf9 \strokec9 /\cf5 \strokec5  \cf14 \strokec14 60\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                     \cb1 \
-\cb3                     \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (\cf5 \strokec5 minutes \cf9 \strokec9 <=\cf5 \strokec5  \cf13 \strokec13 TARGET_MINUTES\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                         showResult\cf9 \strokec9 (\cf5 \cb1 \strokec5 \
-\cb3                             \cf10 \strokec10 "WITHIN TARGET"\cf9 \strokec9 ,\cf5 \strokec5  \cb1 \
-\cb3                             \cf10 \strokec10 `Estimated Drive Time: \cf9 \strokec9 $\{\cf5 \strokec5 minutes\cf9 \strokec9 \}\cf10 \strokec10  mins. This location meets the Blue Light response time target.`\cf9 \strokec9 ,\cf5 \strokec5  \cb1 \
-\cb3                             \cf12 \strokec12 true\cf5 \cb1 \strokec5 \
-\cb3                         \cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                     \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 else\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                         \cf8 \strokec8 // CRITICAL FAILURE MESSAGE\cf5 \cb1 \strokec5 \
-\cb3                         \cf12 \strokec12 const\cf5 \strokec5  failureTitle \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 "CRITICAL: DRIVE TIME EXCEEDED"\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                         \cf12 \strokec12 const\cf5 \strokec5  failureMessage \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 `Estimated Drive Time: \cf9 \strokec9 $\{\cf5 \strokec5 minutes\cf9 \strokec9 \}\cf10 \strokec10  mins. Emergency response time is greater than \cf9 \strokec9 $\{\cf13 \strokec13 TARGET_MINUTES\cf9 \strokec9 \}\cf10 \strokec10  minutes. If the ECAT team is on the helipad, consider using the aircraft to respond.`\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                         \cb1 \
-\cb3                         showResult\cf9 \strokec9 (\cf5 \cb1 \strokec5 \
-\cb3                             failureTitle\cf9 \strokec9 ,\cf5 \strokec5  \cb1 \
-\cb3                             failureMessage\cf9 \strokec9 ,\cf5 \strokec5  \cb1 \
-\cb3                             \cf12 \strokec12 false\cf5 \cb1 \strokec5 \
-\cb3                         \cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                     \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3                 \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+        // --- MAIN LOGIC CONTROLLER ---\
+        async function handleCheckDriveTime() \{\
+            const inputField = document.getElementById('postcode-input');\
+            const resultContainer = document.getElementById('result-container');\
+            const btn = document.getElementById('check-btn');\
+            \
+            // Replaced alert with a check for empty input\
+            const postcode = inputField.value.trim();\
 \
-\cb3             \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 catch\cf5 \strokec5  \cf9 \strokec9 (\cf5 \strokec5 error\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                 console\cf9 \strokec9 .\cf5 \strokec5 error\cf9 \strokec9 (\cf10 \strokec10 "System Error:"\cf9 \strokec9 ,\cf5 \strokec5  error\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3                 showResult\cf9 \strokec9 (\cf10 \strokec10 "System Error"\cf9 \strokec9 ,\cf5 \strokec5  \cf10 \strokec10 "Could not connect to Google Maps. Please ensure the API script is loaded and the key is valid."\cf9 \strokec9 ,\cf5 \strokec5  \cf12 \strokec12 false\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 finally\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                 \cf8 \strokec8 // Reset Button\cf5 \cb1 \strokec5 \
-\cb3                 btn\cf9 \strokec9 .\cf5 \strokec5 disabled \cf9 \strokec9 =\cf5 \strokec5  \cf12 \strokec12 false\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3                 btn\cf9 \strokec9 .\cf5 \strokec5 innerText \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 "Check Drive Time"\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+            if (!postcode) \{\
+                // Simple non-blocking message if input is empty\
+                btn.innerText = "Please enter a postcode.";\
+                setTimeout(() => btn.innerText = "Check Drive Time", 2000);\
+                return;\
+            \}\
 \
-\cb3         \cf8 \strokec8 // Helper to update the UI\cf5 \cb1 \strokec5 \
-\cb3         \cf12 \strokec12 function\cf5 \strokec5  showResult\cf9 \strokec9 (\cf5 \strokec5 title\cf9 \strokec9 ,\cf5 \strokec5  message\cf9 \strokec9 ,\cf5 \strokec5  isSuccess\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 const\cf5 \strokec5  container \cf9 \strokec9 =\cf5 \strokec5  document\cf9 \strokec9 .\cf5 \strokec5 getElementById\cf9 \strokec9 (\cf10 \strokec10 'result-container'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 const\cf5 \strokec5  titleEl \cf9 \strokec9 =\cf5 \strokec5  document\cf9 \strokec9 .\cf5 \strokec5 getElementById\cf9 \strokec9 (\cf10 \strokec10 'result-title'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 const\cf5 \strokec5  detailsEl \cf9 \strokec9 =\cf5 \strokec5  document\cf9 \strokec9 .\cf5 \strokec5 getElementById\cf9 \strokec9 (\cf10 \strokec10 'result-details'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
+            // 2. UI Updates (Loading State)\
+            btn.disabled = true;\
+            btn.innerText = "Calculating real-time traffic...";\
+            resultContainer.style.display = 'none';\
 \
-\cb3             \cf8 \strokec8 // Reset classes\cf5 \cb1 \strokec5 \
-\cb3             container\cf9 \strokec9 .\cf5 \strokec5 classList\cf9 \strokec9 .\cf5 \strokec5 remove\cf9 \strokec9 (\cf10 \strokec10 'result-success'\cf9 \strokec9 ,\cf5 \strokec5  \cf10 \strokec10 'result-fail'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cb1 \
-\cb3             \cf8 \strokec8 // Add appropriate class\cf5 \cb1 \strokec5 \
-\cb3             \cf12 \strokec12 if\cf5 \strokec5  \cf9 \strokec9 (\cf5 \strokec5 title\cf9 \strokec9 .\cf5 \strokec5 includes\cf9 \strokec9 (\cf10 \strokec10 "Error"\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 ||\cf5 \strokec5  \cf9 \strokec9 !\cf5 \strokec5 isSuccess\cf9 \strokec9 )\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                 container\cf9 \strokec9 .\cf5 \strokec5 classList\cf9 \strokec9 .\cf5 \strokec5 add\cf9 \strokec9 (\cf10 \strokec10 'result-fail'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf9 \strokec9 \}\cf5 \strokec5  \cf12 \strokec12 else\cf5 \strokec5  \cf9 \strokec9 \{\cf5 \cb1 \strokec5 \
-\cb3                 container\cf9 \strokec9 .\cf5 \strokec5 classList\cf9 \strokec9 .\cf5 \strokec5 add\cf9 \strokec9 (\cf10 \strokec10 'result-success'\cf9 \strokec9 );\cf5 \cb1 \strokec5 \
-\cb3             \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
+            try \{\
+                // 3. Call the Real API\
+                const data = await getRealDriveTime(postcode);\
 \
-\cb3             titleEl\cf9 \strokec9 .\cf5 \strokec5 textContent \cf9 \strokec9 =\cf5 \strokec5  title\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             detailsEl\cf9 \strokec9 .\cf5 \strokec5 textContent \cf9 \strokec9 =\cf5 \strokec5  message\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3             container\cf9 \strokec9 .\cf5 \strokec5 style\cf9 \strokec9 .\cf5 \strokec5 display \cf9 \strokec9 =\cf5 \strokec5  \cf10 \strokec10 'block'\cf9 \strokec9 ;\cf5 \cb1 \strokec5 \
-\cb3         \cf9 \strokec9 \}\cf5 \cb1 \strokec5 \
-\cb3     \cf6 \strokec6 </\cf2 \strokec2 script\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cf6 \cb3 \strokec6 </\cf2 \strokec2 body\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
-\cf6 \cb3 \strokec6 </\cf2 \strokec2 html\cf6 \strokec6 >\cf5 \cb1 \strokec5 \
+                // 4. Process Results\
+                if (!data.valid) \{\
+                    const errorMsg = data.reason === 'NOT_FOUND' || data.reason === 'ZERO_RESULTS' \
+                        ? "Postcode not found or no valid route could be determined." \
+                        : "A calculation error occurred.";\
+                    \
+                    showResult("Error", errorMsg, false);\
+                \} else \{\
+                    // Convert seconds to minutes (rounding up is safer for "response time" estimates)\
+                    const minutes = Math.ceil(data.durationInSeconds / 60);\
+                    \
+                    if (minutes <= TARGET_MINUTES) \{\
+                        showResult(\
+                            "WITHIN TARGET", \
+                            `Estimated Drive Time: $\{minutes\} mins. This location meets the Blue Light response time target.`, \
+                            true\
+                        );\
+                    \} else \{\
+                        // CRITICAL FAILURE MESSAGE\
+                        const failureTitle = "CRITICAL: DRIVE TIME EXCEEDED";\
+                        const failureMessage = `Estimated Drive Time: $\{minutes\} mins. Emergency response time is greater than $\{TARGET_MINUTES\} minutes. If the ECAT team is on the helipad, consider using the aircraft to respond.`;\
+                        \
+                        showResult(\
+                            failureTitle, \
+                            failureMessage, \
+                            false\
+                        );\
+                    \}\
+                \}\
 \
-}
+            \} catch (error) \{\
+                console.error("System Error:", error);\
+                showResult("System Error", "Could not connect to Google Maps. Please ensure the API script is loaded and the key is valid.", false);\
+            \} finally \{\
+                // Reset Button\
+                btn.disabled = false;\
+                btn.innerText = "Check Drive Time";\
+            \}\
+        \}\
+\
+        // Helper to update the UI\
+        function showResult(title, message, isSuccess) \{\
+            const container = document.getElementById('result-container');\
+            const titleEl = document.getElementById('result-title');\
+            const detailsEl = document.getElementById('result-details');\
+\
+            // Reset classes\
+            container.classList.remove('result-success', 'result-fail');\
+            \
+            // Add appropriate class\
+            if (title.includes("Error") || !isSuccess) \{\
+                container.classList.add('result-fail');\
+            \} else \{\
+                container.classList.add('result-success');\
+            \}\
+\
+            titleEl.textContent = title;\
+            detailsEl.textContent = message;\
+            container.style.display = 'block';\
+        \}\
+    </script>\
+</body>\
+</html>}
