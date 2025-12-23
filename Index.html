@@ -1,0 +1,375 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="en">\
+<head>\
+    <meta charset="UTF-8">\
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+    <title>ECAT Blue Light Response Checker</title>\
+    \
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-HPemyZUKc42MBLUbVD0JGuqffBpei94&libraries=places"></script>\
+\
+    <style>\
+        :root \{\
+            --primary-color: #005eb8; /* NHS Blue */\
+            --secondary-color: #ffffff;\
+            --alert-red: #d9002f;\
+            --success-green: #007f3b;\
+            --bg-color: #f0f4f5;\
+        \}\
+\
+        body \{\
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\
+            background-color: var(--bg-color);\
+            margin: 0;\
+            padding: 0;\
+            display: flex;\
+            flex-direction: column;\
+            min-height: 100vh;\
+            color: #333;\
+        \}\
+\
+        header \{\
+            background-color: var(--primary-color);\
+            color: var(--secondary-color);\
+            padding: 1.5rem;\
+            text-align: center;\
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\
+        \}\
+\
+        h1 \{\
+            margin: 0;\
+            font-size: 1.8rem;\
+        \}\
+\
+        main \{\
+            flex: 1;\
+            display: flex;\
+            flex-direction: column;\
+            align-items: center;\
+            padding: 2rem;\
+            max-width: 600px;\
+            margin: 0 auto;\
+            width: 100%;\
+            box-sizing: border-box;\
+        \}\
+\
+        .card \{\
+            background: white;\
+            padding: 2rem;\
+            border-radius: 8px;\
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);\
+            width: 100%;\
+            margin-bottom: 2rem;\
+        \}\
+\
+        .info-panel \{\
+            background-color: #e8edee;\
+            border-left: 5px solid var(--primary-color);\
+            padding: 1rem;\
+            margin-bottom: 1.5rem;\
+        \}\
+\
+        .info-item \{\
+            margin-bottom: 0.5rem;\
+            font-size: 0.95rem;\
+        \}\
+\
+        .info-item strong \{\
+            color: var(--primary-color);\
+        \}\
+\
+        label \{\
+            display: block;\
+            margin-bottom: 0.5rem;\
+            font-weight: bold;\
+        \}\
+\
+        input[type="text"] \{\
+            width: 100%;\
+            padding: 12px;\
+            border: 2px solid #ccc;\
+            border-radius: 4px;\
+            font-size: 1rem;\
+            box-sizing: border-box; /* Ensures padding doesn't affect width */\
+            margin-bottom: 1rem;\
+        \}\
+\
+        input[type="text"]:focus \{\
+            border-color: var(--primary-color);\
+            outline: none;\
+        \}\
+\
+        button \{\
+            width: 100%;\
+            padding: 14px;\
+            background-color: var(--primary-color);\
+            color: white;\
+            border: none;\
+            border-radius: 4px;\
+            font-size: 1.1rem;\
+            font-weight: bold;\
+            cursor: pointer;\
+            transition: background-color 0.2s;\
+        \}\
+\
+        button:hover \{\
+            background-color: #004b93;\
+        \}\
+\
+        button:disabled \{\
+            background-color: #999;\
+            cursor: not-allowed;\
+        \}\
+\
+        /* Result Display Styles */\
+        #result-container \{\
+            margin-top: 1.5rem;\
+            display: none; /* Hidden by default */\
+            padding: 1.5rem;\
+            border-radius: 6px;\
+            text-align: center;\
+        \}\
+\
+        .result-success \{\
+            background-color: #e6f4ea;\
+            border: 2px solid var(--success-green);\
+            color: var(--success-green);\
+        \}\
+\
+        .result-fail \{\
+            background-color: #fce8e8;\
+            border: 2px solid var(--alert-red);\
+            color: var(--alert-red);\
+        \}\
+\
+        .result-title \{\
+            font-size: 1.4rem;\
+            font-weight: bold;\
+            margin-bottom: 0.5rem;\
+        \}\
+\
+        .result-time \{\
+            font-size: 1.1rem;\
+        \}\
+\
+        footer \{\
+            background-color: #333;\
+            color: #ccc;\
+            text-align: center;\
+            padding: 1rem;\
+            font-size: 0.9rem;\
+            margin-top: auto;\
+        \}\
+\
+        footer a \{\
+            color: white;\
+            text-decoration: none;\
+        \}\
+    </style>\
+</head>\
+<body>\
+\
+    <header>\
+        <h1>ECAT Blue Light Response Checker</h1>\
+    </header>\
+\
+    <main>\
+        <div class="card">\
+            <div class="info-panel">\
+                <div class="info-item"><strong>Fixed Destination:</strong> The Royal London Hospital, E1 1BB</div>\
+                <div class="info-item"><strong>Target Response Time:</strong> &le; 25 Minutes</div>\
+            </div>\
+\
+            <label for="postcode-input">Enter UK Postcode</label>\
+            <input type="text" id="postcode-input" placeholder="e.g. E14 9GE" aria-label="Enter Postcode">\
+            \
+            <button id="check-btn" onclick="handleCheckDriveTime()">Check Drive Time</button>\
+\
+            <div id="result-container">\
+                <div class="result-title" id="result-title"></div>\
+                <div class="result-time" id="result-details"></div>\
+            </div>\
+        </div>\
+    </main>\
+\
+    <footer>\
+        Any issues with this web app please contact <a href="mailto:contact@example.com">contact@example.com</a>\
+    </footer>\
+\
+    <script>\
+        // CONFIGURATION\
+        const TARGET_DESTINATION = "The Royal London Hospital, E1 1BB, UK";\
+        const TARGET_MINUTES = 25;\
+        \
+        // --- 1. MOCK API FUNCTION (DEFAULT) ---\
+        // This function simulates an API call delay and returns data without using the key.\
+        // It ensures the app is testable immediately.\
+        async function getMockDriveTime(origin) \{\
+            console.log("Using Mock API for:", origin);\
+            \
+            return new Promise((resolve) => \{\
+                setTimeout(() => \{\
+                    // Simulate a random drive time between 15 and 40 minutes for demo purposes\
+                    // If the user types "E1", make it short (Success). Otherwise, random.\
+                    const isClose = origin.toUpperCase().startsWith("E1");\
+                    const randomMinutes = isClose \
+                        ? Math.floor(Math.random() * 10) + 10 // 10-20 mins\
+                        : Math.floor(Math.random() * 30) + 20; // 20-50 mins\
+                    \
+                    // The API typically returns seconds, so we mock that\
+                    resolve(\{\
+                        durationInSeconds: randomMinutes * 60, \
+                        valid: true\
+                    \});\
+                \}, 1500); // 1.5 second simulated network delay\
+            \});\
+        \}\
+\
+        // --- 2. REAL GOOGLE API FUNCTION (OPTIONAL) ---\
+        // To use this: \
+        // 1. Ensure the Google Maps script tag in <head> is uncommented.\
+        // 2. Change the 'USE_REAL_API' constant to true.\
+        async function getRealDriveTime(origin) \{\
+            console.log("Calling Real Google Maps API...");\
+            \
+            // We wrap the callback-based Google Maps JS API in a Promise to use async/await\
+            return new Promise((resolve, reject) => \{\
+                if (!window.google || !window.google.maps) \{\
+                    reject("Google Maps API not loaded. Check your API key and script tag.");\
+                    return;\
+                \}\
+\
+                const service = new google.maps.DistanceMatrixService();\
+                \
+                service.getDistanceMatrix(\
+                    \{\
+                        origins: [origin],\
+                        destinations: [TARGET_DESTINATION],\
+                        travelMode: 'DRIVING',\
+                        drivingOptions: \{\
+                            departureTime: new Date(), // Real-time traffic\
+                            trafficModel: 'bestguess'\
+                        \},\
+                        unitSystem: google.maps.UnitSystem.METRIC\
+                    \}, \
+                    (response, status) => \{\
+                        if (status !== 'OK') \{\
+                            console.error("API Error:", status);\
+                            resolve(\{ valid: false \});\
+                        \} else \{\
+                            // Parse the response\
+                            const element = response.rows[0].elements[0];\
+                            if (element.status === 'OK') \{\
+                                // Prefer duration_in_traffic if available, else standard duration\
+                                const durationSec = element.duration_in_traffic \
+                                    ? element.duration_in_traffic.value \
+                                    : element.duration.value;\
+                                \
+                                resolve(\{\
+                                    durationInSeconds: durationSec,\
+                                    valid: true\
+                                \});\
+                            \} else \{\
+                                resolve(\{ valid: false \});\
+                            \}\
+                        \}\
+                    \}\
+                );\
+            \});\
+        \}\
+\
+        // --- MAIN LOGIC CONTROLLER ---\
+        \
+        // TOGGLE THIS TO SWITCH MODES\
+        const USE_REAL_API = false; // Set to true to use your Key\
+\
+        async function handleCheckDriveTime() \{\
+            const inputField = document.getElementById('postcode-input');\
+            const resultContainer = document.getElementById('result-container');\
+            const resultTitle = document.getElementById('result-title');\
+            const resultDetails = document.getElementById('result-details');\
+            const btn = document.getElementById('check-btn');\
+            \
+            const postcode = inputField.value.trim();\
+\
+            // 1. Validation\
+            if (!postcode) \{\
+                alert("Please enter a valid UK Postcode.");\
+                return;\
+            \}\
+\
+            // 2. UI Updates (Loading State)\
+            btn.disabled = true;\
+            btn.innerText = "Calculating real-time traffic...";\
+            resultContainer.style.display = 'none';\
+\
+            try \{\
+                let data;\
+                \
+                // 3. API Call (Demonstrating Async/Await)\
+                if (USE_REAL_API) \{\
+                    data = await getRealDriveTime(postcode);\
+                \} else \{\
+                    data = await getMockDriveTime(postcode);\
+                \}\
+\
+                // 4. Process Results\
+                if (!data.valid) \{\
+                    showResult("Error", "Could not calculate route. Check postcode.", false);\
+                \} else \{\
+                    const minutes = Math.ceil(data.durationInSeconds / 60);\
+                    \
+                    if (minutes <= TARGET_MINUTES) \{\
+                        showResult(\
+                            "WITHIN TARGET", \
+                            `Time: $\{minutes\} mins (Target: $\{TARGET_MINUTES\} mins)`, \
+                            true\
+                        );\
+                    \} else \{\
+                        showResult(\
+                            "OUTSIDE TARGET", \
+                            `Time: $\{minutes\} mins (Target: $\{TARGET_MINUTES\} mins)`, \
+                            false\
+                        );\
+                    \}\
+                \}\
+\
+            \} catch (error) \{\
+                console.error(error);\
+                showResult("System Error", "An error occurred while fetching data.", false);\
+            \} finally \{\
+                // Reset Button\
+                btn.disabled = false;\
+                btn.innerText = "Check Drive Time";\
+            \}\
+        \}\
+\
+        // Helper to update the UI\
+        function showResult(title, message, isSuccess) \{\
+            const container = document.getElementById('result-container');\
+            const titleEl = document.getElementById('result-title');\
+            const detailsEl = document.getElementById('result-details');\
+\
+            // Reset classes\
+            container.classList.remove('result-success', 'result-fail');\
+            \
+            // Add appropriate class\
+            if (title === "Error" || title === "System Error") \{\
+                 container.classList.add('result-fail');\
+            \} else \{\
+                container.classList.add(isSuccess ? 'result-success' : 'result-fail');\
+            \}\
+\
+            titleEl.textContent = title;\
+            detailsEl.textContent = message;\
+            container.style.display = 'block';\
+        \}\
+    </script>\
+</body>\
+</html>}
